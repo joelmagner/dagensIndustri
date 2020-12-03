@@ -24,7 +24,7 @@ export class DiRepository {
       );
     }
 
-    if (limit) {
+    if (limit && limit > 0) {
       data = data.splice(0, limit);
     }
 
