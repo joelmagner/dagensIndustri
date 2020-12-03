@@ -1,12 +1,6 @@
-import { Arg, Field, Int, ObjectType, Query, Resolver } from "type-graphql";
+import { Arg, Int, Query, Resolver } from "type-graphql";
 import { RssComponent } from "../components/rss.component";
 import { Di } from "../entities/di.entity";
-
-@ObjectType()
-export class PostResponse {
-  @Field(() => Di, { nullable: true })
-  posts?: Di[];
-}
 
 @Resolver(Di)
 export class DiRepository {
