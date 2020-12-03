@@ -1,0 +1,67 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Server - Watch For Changes",
+        "type": "shell",
+        "command": "npm",
+        "args": ["run", "watch"],
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder}/server/"
+        },
+        "presentation": {
+          "reveal": "always",
+          "panel": "shared",
+          "group": "groupA"
+        }
+      },
+      {
+        "label": "Server - Start Server",
+        "type": "shell",
+        "command": "npm",
+        "args": ["run", "dev"],
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder}/server/"
+        },
+        "presentation": {
+          "reveal": "always",
+          "panel": "shared",
+          "group": "groupA"
+        }
+      },
+      {
+        "label": "WEB - Start Webserver",
+        "type": "shell",
+        "command": "npm",
+        "args": ["run", "dev"],
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder}/web/"
+        },
+        "presentation": {
+          "reveal": "always",
+          "panel": "shared",
+          "group": "groupB"
+        }
+      },
+      {
+        "label": "WEB - Generate Graphql Typesafety Mutation/Query",
+        "type": "shell",
+        "command": "npm",
+        "args": ["run", "gen"],
+        "group": "build",
+        "options": {
+          "cwd": "${workspaceFolder}/web/"
+        },
+        "presentation": {
+          "reveal": "always",
+          "panel": "shared",
+          "group": "groupB"
+        }
+      }
+    ]
+  }

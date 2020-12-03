@@ -1,0 +1,12 @@
+query Posts($url: String!, $limit: Int, $order: Boolean) {
+  posts(url: $url, limit: $limit, order: $order) {
+    title
+    creator
+    link
+    content
+    contentSnippet
+    guid
+    pubDate
+    isoDate
+  }
+}
