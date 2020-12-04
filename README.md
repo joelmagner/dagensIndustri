@@ -5,12 +5,11 @@
 |Package|Description|
 |--|--|
 |Typescript| |
-|Urql|Graphql client|
 |GraphQL|API-schema|
 |CORS| |
 |TypeGraphQL| Typesafety |
 |Express | Routing for requests |
-|ApolloServerExpress| Middleware for express |
+|ApolloServerExpress| GraphQL Middleware for express |
 ---
 
 ## Frontend
