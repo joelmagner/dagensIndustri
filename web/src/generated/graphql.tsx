@@ -37,6 +37,14 @@ export type Di = {
   date?: Maybe<Scalars['String']>;
   pubDate?: Maybe<Scalars['String']>;
   isoDate?: Maybe<Scalars['String']>;
+  thumbnail?: Maybe<Thumbnail>;
+};
+
+export type Thumbnail = {
+  __typename?: 'Thumbnail';
+  type?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
 };
 
 export type PostsQueryVariables = Exact<{
@@ -51,6 +59,10 @@ export type PostsQuery = (
   & { posts: Array<(
     { __typename?: 'Di' }
     & Pick<Di, 'title' | 'creator' | 'link' | 'content' | 'contentSnippet' | 'guid' | 'pubDate' | 'isoDate'>
+    & { thumbnail?: Maybe<(
+      { __typename?: 'Thumbnail' }
+      & Pick<Thumbnail, 'url' | 'type' | 'description'>
+    )> }
   )> }
 );
 
@@ -66,6 +78,11 @@ export const PostsDocument = gql`
     guid
     pubDate
     isoDate
+    thumbnail {
+      url
+      type
+      description
+    }
   }
 }
     `;

@@ -1,10 +1,25 @@
-import Parser from "rss-parser";
+import Parser, { Item } from "rss-parser";
+import { Thumbnail } from "../entities/di.entity";
+
+export interface DiItem extends Item {
+  thumbnail?: Thumbnail & {
+    "media:description": string[];
+  };
+}
+
+export interface DiOutput extends Parser.Output {
+  items?: Item[] & DiItem;
+}
 
 export class RssComponent {
   private parser: Parser;
 
   constructor() {
-    this.parser = new Parser();
+    this.parser = new Parser({
+      customFields: {
+        item: [["media:content", "thumbnail"]],
+      },
+    });
   }
 
   public async fetchRSS(url: string): Promise<Parser.Output> {

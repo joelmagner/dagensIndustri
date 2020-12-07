@@ -1,4 +1,4 @@
-import { Flex, Box, Link, Heading, Text } from "@chakra-ui/react";
+import { Flex, Box, Link, Heading, Text, Img } from "@chakra-ui/react";
 import React from "react";
 import { Di } from "../generated/graphql";
 
@@ -14,6 +14,8 @@ export const Post: React.FC<PostProps> = ({ post }) => {
           <Link href={post.guid}>
             <Heading fontSize="xl">{post.title}</Heading>
           </Link>
+          <Img src={post.thumbnail?.url} />
+          <Text>{post.thumbnail?.description}</Text>
           <Flex>
             <Text mr={1}>Posted by</Text>
             <Text
@@ -28,7 +30,7 @@ export const Post: React.FC<PostProps> = ({ post }) => {
 
           <Flex align="center">
             <Text flex={1} mt={4}>
-              {post.isoDate}
+              {new Date(post.pubDate).toLocaleString()}
             </Text>
             <Box ml="auto">{post.contentSnippet}</Box>
           </Flex>

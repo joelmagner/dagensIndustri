@@ -8,5 +8,10 @@ query Posts($url: String!, $limit: Int, $order: Boolean) {
     guid
     pubDate
     isoDate
+    thumbnail {
+      url
+      type
+      description
+    }
   }
 }
