@@ -6,6 +6,7 @@ import { Context } from "apollo-server-core";
 import cors from "cors";
 import { REQUEST_ORIGIN_URL_CORS } from "./utils/constants";
 import { DiRepository } from "./repositories/di.repository";
+import { PostRepository } from "./repositories/post.repository";
 
 interface Initialization {
   url: String;
@@ -27,7 +28,7 @@ export class Main implements Initialization {
 
     const apolloServer = new ApolloServer({
       schema: await buildSchema({
-        resolvers: [DiRepository],
+        resolvers: [DiRepository, PostRepository],
         validate: false,
       }),
       debug: true,
@@ -43,9 +44,7 @@ export class Main implements Initialization {
     this.startServer(app);
   };
 
-  private startServer = (app: {
-    listen: (arg0: number, arg1: () => void) => void;
-  }) => {
+  private startServer = (app: express.Express) => {
     app.listen(this.port, () => {
       console.log(`✅ Server started on ${this.url + ":" + this.port}`);
     });

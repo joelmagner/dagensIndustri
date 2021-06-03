@@ -1,5 +1,5 @@
 import Parser, { Item } from "rss-parser";
-import { Thumbnail } from "../entities/di.entity";
+import { Thumbnail } from "../entities/di";
 
 export interface DiItem extends Item {
   thumbnail?: Thumbnail & {

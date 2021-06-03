@@ -19,17 +19,15 @@ export const PostFeed: React.FC<PostFeedProps> = ({}) => {
 
   const [postData, setPostData] = useState([]);
 
-  const [
-    { data: diData, error: diError, fetching: diFetching },
-  ] = usePostsQuery({
-    variables: diVar,
-  });
+  const [{ data: diData, error: diError, fetching: diFetching }] =
+    usePostsQuery({
+      variables: diVar,
+    });
 
-  const [
-    { data: dnData, error: dnError, fetching: dnFetching },
-  ] = usePostsQuery({
-    variables: dnVar,
-  });
+  const [{ data: dnData, error: dnError, fetching: dnFetching }] =
+    usePostsQuery({
+      variables: dnVar,
+    });
 
   useEffect(() => {
     setPostData(diData?.posts);
@@ -48,7 +46,6 @@ export const PostFeed: React.FC<PostFeedProps> = ({}) => {
   return (
     <>
       <Box mt={8} mx="auto" w="50vw">
-        {console.log("dwadwa", postData)}
         {!postData && (diFetching || dnFetching) ? (
           <div>Loading...</div>
         ) : (

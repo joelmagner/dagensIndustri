@@ -17,6 +17,7 @@ export type Scalars = {
 export type Query = {
   __typename?: 'Query';
   posts: Array<Di>;
+  getBool: Scalars['Boolean'];
 };
 
 
@@ -47,6 +48,59 @@ export type Thumbnail = {
   description?: Maybe<Scalars['String']>;
 };
 
+export type Mutation = {
+  __typename?: 'Mutation';
+  createPost: PostResponse;
+};
+
+
+export type MutationCreatePostArgs = {
+  input: PostInput;
+};
+
+export type PostResponse = {
+  __typename?: 'PostResponse';
+  errors?: Maybe<Array<FieldError>>;
+  post?: Maybe<Post>;
+};
+
+export type FieldError = {
+  __typename?: 'FieldError';
+  field: Scalars['String'];
+  message: Scalars['String'];
+};
+
+export type Post = {
+  __typename?: 'Post';
+  title: Scalars['String'];
+  text: Scalars['String'];
+  siffra?: Maybe<Scalars['Int']>;
+};
+
+export type PostInput = {
+  title: Scalars['String'];
+  text: Scalars['String'];
+};
+
+export type CreatePostMutationVariables = Exact<{
+  input: PostInput;
+}>;
+
+
+export type CreatePostMutation = (
+  { __typename?: 'Mutation' }
+  & { createPost: (
+    { __typename?: 'PostResponse' }
+    & { post?: Maybe<(
+      { __typename?: 'Post' }
+      & Pick<Post, 'title' | 'text'>
+    )>, errors?: Maybe<Array<(
+      { __typename?: 'FieldError' }
+      & Pick<FieldError, 'field' | 'message'>
+    )>> }
+  ) }
+);
+
 export type PostsQueryVariables = Exact<{
   url: Scalars['String'];
   limit?: Maybe<Scalars['Int']>;
@@ -67,6 +121,24 @@ export type PostsQuery = (
 );
 
 
+export const CreatePostDocument = gql`
+    mutation CreatePost($input: PostInput!) {
+  createPost(input: $input) {
+    post {
+      title
+      text
+    }
+    errors {
+      field
+      message
+    }
+  }
+}
+    `;
+
+export function useCreatePostMutation() {
+  return Urql.useMutation<CreatePostMutation, CreatePostMutationVariables>(CreatePostDocument);
+};
 export const PostsDocument = gql`
     query Posts($url: String!, $limit: Int, $order: Boolean) {
   posts(url: $url, limit: $limit, order: $order) {

@@ -1,6 +1,6 @@
 import { Arg, Int, Query, Resolver } from "type-graphql";
 import { DiItem, RssComponent } from "../components/rss.component";
-import { Di } from "../entities/di.entity";
+import { Di } from "../entities/di";
 
 @Resolver(Di)
 export class DiRepository {
@@ -11,7 +11,7 @@ export class DiRepository {
     @Arg("order", () => Boolean, { nullable: true }) order: Boolean | null
   ): Promise<Di[] | null> {
     const rss = new RssComponent();
-    let data = ((await rss.fetchRSS(url)).items?.filter((item: DiItem) => {
+    let data = (await rss.fetchRSS(url)).items?.filter((item: DiItem) => {
       if (item.thumbnail) {
         item.thumbnail.description = item.thumbnail["media:description"][0];
         item.thumbnail.type = Object.values(item.thumbnail)[0].type;
@@ -19,7 +19,7 @@ export class DiRepository {
         return item.thumbnail;
       }
       return item;
-    }) as unknown) as Di[];
+    }) as unknown as Di[];
 
     if (!data) {
       return null;
